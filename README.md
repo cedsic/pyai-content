@@ -31,7 +31,7 @@ You can contribute by improving or adding:
 - 🔗 Interesting links (in /links/)
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for full details.  
-Outstanding contributors will also be acknowledged on the py.ai website 🌟 in the future.
+Outstanding contributors will also be acknowledged on the [Py.AI](https://py.ai) website 🌟 in the future.
 
 ## ⚖️ License
 This project is licensed under the MIT License.
