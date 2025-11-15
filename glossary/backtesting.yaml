@@ -1,0 +1,92 @@
+name: "Backtesting"
+slug: "backtesting"
+headline: "Backtesting is the process of evaluating predictive models, algorithms, or strategies using historical data before real-world deployment."
+description: |
+  **Backtesting** is a key step in building and validating predictive models or trading strategies. It involves:
+
+  - 📅 **Using historical data** to see how a model or strategy would have performed in the past  
+  - 🔍 **Testing predictions** against real past outcomes to measure accuracy and reliability  
+  - ✅ **Gaining confidence** that the model will work well before applying it in real-world situations  
+
+  In short, backtesting helps you safely evaluate and improve your models by learning from past data, reducing risks when making future decisions.
+
+  ---
+
+  ### ⚙️ How Backtesting Works 
+
+  At its core, backtesting mimics a live environment by applying a model to a sequence of past data points, generating predictions, and comparing those predictions to actual outcomes. This allows for the measurement of key **model performance** metrics such as accuracy, precision, recall, or financial returns. Since backtesting relies heavily on historical data, it is tightly coupled with proper **data workflow** management, ensuring that data leakage is avoided and that the model only learns from information available at each point in time.
+
+  ---
+
+  ### 🔄 Typical Backtesting Workflow 
+
+  A typical backtesting workflow involves splitting the data into training and testing windows that move forward through time—a process often called a rolling or sliding window approach. This approach helps detect issues like **model drift**, where the model’s performance degrades due to changes in the underlying data distribution. Tools like **pandas** and **NumPy** are invaluable here for efficient data manipulation and numerical computations.
+
+  ```python
+  import pandas as pd
+  import numpy as np
+  from sklearn.ensemble import RandomForestClassifier
+  from sklearn.metrics import accuracy_score
+
+  # Example: Simple backtesting on time series data
+  data = pd.read_csv('time_series_data.csv', parse_dates=['date'])
+  data = data.sort_values('date')
+
+  window_size = 100
+  accuracies = []
+
+  for start in range(len(data) - window_size):
+      train = data.iloc[start:start+window_size]
+      test = data.iloc[start+window_size:start+window_size+10]
+      
+      model = RandomForestClassifier()
+      model.fit(train.drop(['target', 'date'], axis=1), train['target'])
+      preds = model.predict(test.drop(['target', 'date'], axis=1))
+      acc = accuracy_score(test['target'], preds)
+      accuracies.append(acc)
+
+  print(f"Average backtest accuracy: {np.mean(accuracies):.2f}")
+  ```
+  <br>
+  This code simulates a rolling-window backtesting process, where a machine learning model (Random Forest) is repeatedly trained on past data and tested on future segments to evaluate how well it generalizes over time.
+
+  ---
+
+  ### 🧪 Role in MLOps and Experiment Tracking 
+
+  Within the broader **MLOps** ecosystem, backtesting serves as a cornerstone for both **experiment tracking** and **model selection**. It enables teams to validate model stability, reproducibility, and long-term reliability before deployment. Tools like **MLflow**, **Comet**, **Weights & Biases**, and **Neptune** streamline this process by allowing teams to **log backtest results**, **compare model versions**, and **manage artifacts** efficiently. These platforms ensure **reproducibility**, helping avoid overfitting while maintaining consistent, trustworthy deployment pipelines.
+
+  ---
+
+  ### 📊 Visualization of Backtest Results 
+
+  Visualization transforms raw backtest metrics into actionable insights. Libraries such as **Altair**, **Plotly**, **Matplotlib**, and **Bokeh** enable data scientists to build interactive dashboards and plots that reveal trends, detect anomalies, and compare strategies side by side. Common visualizations include **cumulative return curves**, **rolling accuracy plots**, and **confusion matrices over time** — all essential for understanding model behavior beyond numerical summaries.
+
+  ---
+
+  ### 🧰 Common Tools in Backtesting
+
+  | Tool | Role in Backtesting |
+  |------|----------------------|
+  | **MLflow 🧬** | Experiment tracking, model versioning, and performance comparison across backtests |
+  | **Comet ☄️** | Logging metrics, tracking hyperparameters, and managing backtest runs |
+  | **Altair 🎨**, **Plotly 📊**, **Matplotlib 📈**, **Bokeh 🪶** | Visualization libraries for analyzing and presenting backtest results with interactive or static charts |
+  | **Pandas 🐼** | Data manipulation, rolling window creation, and time-based slicing of datasets |
+  | **QuantLib 🏦** | Quantitative finance library for pricing, portfolio valuation, and realistic market simulations |
+  | **QuantConnect 🚀** | Cloud platform for large-scale backtesting, strategy development, and live trading integration |
+
+  ---
+
+  ### 🔗 Related Concepts
+
+  Backtesting intersects with several other key areas of machine learning operations:  
+  - **Hyperparameter Tuning** — guides optimal parameter selection through systematic performance comparison.  
+  - **Feature Engineering** — determines the quality and predictive power of inputs influencing backtest outcomes.  
+  - **Machine Learning Pipelines** — integrates backtesting as a validation step before model promotion to production.  
+  - **Fault Tolerance** — ensures the backtesting system remains robust against data quality issues or computational errors.  
+
+  ---
+
+  ### 🧭 Summary
+
+  Backtesting is far more than a validation step — it is a **strategic safeguard** in deploying reliable predictive models. When coupled with strong **MLOps practices**, rigorous **experiment tracking**, and insightful **visualizations**, it transforms model development into a transparent, reproducible, and data-driven process that supports confident decision-making in real-world applications.

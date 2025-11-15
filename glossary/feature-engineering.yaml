@@ -1,0 +1,116 @@
+name: "Feature Engineering"
+slug: "feature-engineering"
+headline: "Feature engineering creates and transforms input variables to improve a machine learning model’s predictive power and performance."
+description: |
+  **Feature Engineering** is a crucial step in the **machine learning lifecycle**, transforming raw data into meaningful inputs that improve model accuracy and usefulness. It involves the **creation, transformation, and selection** of features (variables) from datasets to enhance the predictive power of **machine learning models**. This process often requires **domain expertise, creativity, and iterative experimentation**, distinguishing it from fully automated approaches like **AutoML**.
+  <br><br>
+  Key benefits of feature engineering include:  
+  - ⚡ **Boosting model accuracy** by providing clearer signals.  
+  - 🔍 **Enhancing interpretability** through features aligned with human intuition.  
+  - 📉 **Reducing dimensionality** to mitigate the curse of dimensionality.  
+  - 🌱 **Improving generalization** to avoid **model overfitting**.  
+  - ⏱️ **Accelerating training** by filtering irrelevant or redundant data.
+
+  ---
+
+  ### ⚙️ Why Feature Engineering Matters
+
+  Raw data is rarely ready for direct use by algorithms; it often requires thoughtful preparation. For example, timestamps might be broken down into **day-of-week** or **hour-of-day**, categorical variables encoded, and noisy sensor readings smoothed or aggregated.
+  <br><br>
+  Good feature engineering:  
+  - 🎯 **Improves model accuracy** by clarifying patterns in data.  
+  - 🧠 **Supports better understanding** of the problem through intuitive features.  
+  - 🔄 **Facilitates faster and more efficient training** by reducing noise.  
+  - 🚀 **Enables robust models** that generalize well beyond training data.  
+  - 🔧 **Integrates seamlessly** into **machine learning pipelines** orchestrated by tools like **Airflow** or **Kubeflow**.
+
+  ---
+
+  ### 🔍 Key Components & Related Concepts
+
+  Feature engineering comprises several essential tasks that refine data representations and connect closely with other concepts in AI and data science:
+
+  - **Feature Creation:** Generating new features via mathematical transformations (e.g., logarithms, polynomials), aggregations (means, counts over time windows), or domain-specific encodings such as geographic clustering of postal codes.  
+  - **Feature Selection:** Choosing the most relevant features to reduce noise and complexity, using methods like statistical tests or importance scores from models such as **decision trees** and **random forests**.  
+  - **Feature Extraction:** Deriving features from unstructured data like text, images, or audio through techniques such as tokenization, embeddings, or pretrained deep learning models.  
+  - **Feature Transformation:** Scaling, normalizing, or encoding features (e.g., one-hot encoding, standardization, dimensionality reduction like PCA) to prepare data for algorithms.  
+  - **Handling Missing Values:** Applying imputation strategies or flagging missing data to maintain data integrity.
+
+  These processes relate closely to **preprocessing**, which also includes data cleaning and formatting. Well-engineered features simplify **hyperparameter tuning** and reduce risks of **model overfitting**. Additionally, **experiment tracking** tools like **MLflow** and **Comet** help document and reproduce feature engineering workflows. Finally, feature engineering fits into broader **data workflows** managed by orchestration tools such as **Airflow**.
+
+  ---
+
+  ### 📚 Examples & Use Cases
+
+  ##### <u>Time Series Forecasting</u> ⏳📅  
+  Predicting electricity consumption benefits from decomposing timestamps into features like hour of day, day of week, and holidays, along with rolling averages and weather data integration to capture cyclical and external influences.
+  <br><br>
+  ##### <u>Customer Churn Prediction</u> 📞📉  
+  Telecom customer data can be enriched by creating ratios (calls made vs. received), encoding contract types, and aggregating complaint counts, highlighting behavioral trends predictive of churn.
+  <br><br>
+  ##### <u>Natural Language Processing (NLP)</u> 🗣️💬  
+  Text data is transformed through tokenization, n-grams, word embeddings from libraries like **Hugging Face**, and sentiment or topic modeling scores, converting unstructured text into structured features for classification or clustering.
+
+  ---
+
+  ### 🐍 Python Example: Basic Feature Engineering
+
+  Here is a simple example demonstrating feature engineering using **pandas** and **scikit-learn** to prepare a dataset with missing values, categorical variables, and date features:
+
+  ```python
+  import pandas as pd
+  from sklearn.preprocessing import OneHotEncoder, StandardScaler
+  from sklearn.impute import SimpleImputer
+
+  # Sample dataset
+  data = pd.DataFrame({
+      'age': [25, 30, None, 22],
+      'city': ['New York', 'Paris', 'London', 'Paris'],
+      'income': [50000, 60000, 55000, None],
+      'signup_date': pd.to_datetime(['2020-01-01', '2019-06-15', '2021-03-20', '2020-11-11'])
+  })
+
+  # Feature creation: extract year and month from signup_date
+  data['signup_year'] = data['signup_date'].dt.year
+  data['signup_month'] = data['signup_date'].dt.month
+
+  # Handle missing values
+  imputer = SimpleImputer(strategy='mean')
+  data['age'] = imputer.fit_transform(data[['age']])
+  data['income'] = imputer.fit_transform(data[['income']])
+
+  # One-hot encode city
+  encoder = OneHotEncoder(sparse=False)
+  city_encoded = encoder.fit_transform(data[['city']])
+  city_df = pd.DataFrame(city_encoded, columns=encoder.get_feature_names_out(['city']))
+
+  # Combine all features
+  features = pd.concat([data.drop(columns=['city', 'signup_date']), city_df], axis=1)
+
+  # Scale numeric features
+  scaler = StandardScaler()
+  features[['age', 'income', 'signup_year', 'signup_month']] = scaler.fit_transform(
+      features[['age', 'income', 'signup_year', 'signup_month']]
+  )
+
+  print(features)
+  ```
+  <br>
+  This example extracts date components, imputes missing values, encodes categorical variables, and scales numeric features to prepare a clean, model-ready dataset.
+
+  ---
+
+  ### 🛠️ Tools & Frameworks for Feature Engineering
+
+  | Tool/Library                   | Description                                                                                   |
+  |-------------------------------|-----------------------------------------------------------------------------------------------|
+  | **Pandas**                    | Essential for tabular data manipulation, aggregation, and transformation in Python.           |
+  | **Scikit-learn**              | Provides preprocessing utilities like scaling, encoding, and feature selection methods.       |
+  | **Featuretools**              | Automates feature creation via "deep feature synthesis" for relational datasets.               |
+  | **Dask**                     | Enables scalable feature engineering on large datasets by parallelizing pandas operations.    |
+  | **Jupyter**                  | Interactive notebooks ideal for exploratory feature engineering and visualization.             |
+  | **Altair**, **Matplotlib**, **Seaborn** | Visualization libraries to analyze feature distributions and correlations.           |
+  | **Hugging Face**             | Offers pretrained models and datasets to extract embeddings and other features from text.     |
+  | **Autokeras**                | Includes automated feature engineering as part of its AutoML pipeline for deep learning.      |
+  | **MLflow**                   | Supports experiment tracking, including feature versioning and reproducible results.          |
+  | **Airflow**, **Kubeflow**    | Orchestrate complex data workflows including feature engineering steps in production.          |

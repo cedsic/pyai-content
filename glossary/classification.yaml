@@ -1,0 +1,94 @@
+name: "Classification"
+slug: "classification"
+headline: "Classification is a supervised machine learning method that predicts discrete categories or labels from input data."
+description: |
+  **Classification** is a key machine learning task that sorts data into specific groups or categories. It works by training a model on **labeled data**—examples paired with the correct answers—so the model can recognize patterns and predict labels for new data.  
+  Key points to know:  
+
+  - It’s a type of **supervised learning**
+  - Outputs are **categorical labels**, either **binary** (e.g., spam or not spam) or **multi-class** (e.g., types of animals)
+  - Different from regression, which predicts continuous values
+  - Success depends on good data quality, relevant **features**, and effective algorithms
+
+  Classification is everywhere—from filtering emails to diagnosing diseases and recognizing images.
+
+  ---
+
+  ### 🛠️ Why Classification Matters
+
+  Classification is vital because it enables automated decision-making based on data, which is crucial in many industries. For example:
+
+  - 🏥 **In healthcare**, classification models help identify diseases from medical images or patient records. 
+  - 💳 **In finance**, they detect fraudulent transactions by classifying activities as legitimate or suspicious. 
+  - 💬 **In customer service**, sentiment analysis classifies customer feedback as positive, neutral, or negative. 
+  - 🚗 **In autonomous systems**, classification supports perception tasks like recognizing objects or road signs. 
+
+  By automating these decisions, classification models improve efficiency, reduce human error, and enable scalable solutions for complex problems. This makes classification a cornerstone of many **AI models** and an essential part of the **machine learning lifecycle**.
+
+  ---
+
+  ### ⚙️ Key Components of Classification
+
+  Classification is closely related to several other concepts in AI and machine learning:
+
+  - **Labeled Data** 🏷️ — Each example has a known class, used to train the model.
+  - **Features & Feature Engineering** 🔍 — Transforming raw data into useful inputs improves model accuracy.
+  - **Model** 🤖 — Algorithms like decision trees, SVMs, or neural networks that learn to predict labels.
+  - **Training & Testing** 📊 — Data is split so the model learns from one part and is tested on another.
+  - **Evaluation Metrics** 📈 — Accuracy, precision, recall, and F1-score measure performance.
+  - **Hyperparameter Tuning** 🎛️ — Fine-tuning settings (like learning rate) for better results.
+  - **Pipelines & Automation** 🛤️ — Tools like Airflow or FLAML manage data flow and automate training.
+  - **Pretrained Models** 📦 — Use existing models (e.g., Hugging Face) to save time and data.
+  - **Experiment Tracking** 📋 — Platforms like MLflow or Comet track runs and ensure reproducibility.
+
+  ---
+
+  ### 💡 Examples & Use Cases
+
+  Classification is applied across many domains, often with specialized techniques and tools:
+
+  | Use Case                   | Description                                                      | Example Tools           |
+  |----------------------------|------------------------------------------------------------------|------------------------|
+  | Email Spam Detection        | Classify emails as spam or not spam                             | **scikit-learn**, **TensorFlow**, **Hugging Face** |
+  | Medical Image Diagnosis     | Classify X-rays or MRI scans into disease categories            | **MONAI**, **PyTorch**, **Keras**                   |
+  | Sentiment Analysis          | Determine sentiment polarity of customer reviews                | **NLTK**, **spaCy**, **transformers library**       |
+  | Fraud Detection             | Identify fraudulent credit card transactions                    | **FLAML**, **H2O.ai**, **Comet**                     |
+
+  Here is a simple Python example using **scikit-learn** to classify iris flowers into species:
+
+  ```python
+  from sklearn.datasets import load_iris
+  from sklearn.model_selection import train_test_split
+  from sklearn.ensemble import RandomForestClassifier
+  from sklearn.metrics import classification_report
+
+  # Load dataset
+  iris = load_iris()
+  X_train, X_test, y_train, y_test = train_test_split(
+      iris.data, iris.target, test_size=0.3, random_state=42
+  )
+
+  # Train classifier
+  clf = RandomForestClassifier(n_estimators=100, random_state=42)
+  clf.fit(X_train, y_train)
+
+  # Predict and evaluate
+  y_pred = clf.predict(X_test)
+  print(classification_report(y_test, y_pred, target_names=iris.target_names))
+  ```
+  <br>
+  This example highlights how classification models can be built quickly using popular libraries in the **python ecosystem**. 🐍
+
+  ---
+
+  ### 🧰 Tools & Frameworks Commonly Associated with Classification
+
+  Several tools and libraries streamline the development and deployment of classification models:
+
+  - **scikit-learn**: A versatile and beginner-friendly library providing implementations of many classic classification algorithms like random forests, support vector machines, and logistic regression. 📚
+  - **Keras** and **TensorFlow**: High-level neural network libraries widely used for building deep learning models that excel at complex classification tasks such as image and speech recognition. 🧠
+  - **Hugging Face**: Known for pretrained transformer models, it offers state-of-the-art solutions for text classification and natural language processing (NLP) pipelines. 🤗
+  - **FLAML**: An automated machine learning library that helps with **hyperparameter tuning** and model selection to optimize classification performance efficiently. ⚙️
+  - **Kubeflow**: A powerful MLOps framework for orchestrating, scaling, and deploying classification workflows in production environments. ☁️
+
+  Other noteworthy tools include **MONAI** for medical imaging classification, **NLTK** and **spaCy** for text preprocessing and feature extraction, and **Comet** or **MLflow** for experiment tracking during model development.

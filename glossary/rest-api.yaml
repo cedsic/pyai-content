@@ -1,0 +1,95 @@
+name: "REST API"
+slug: "rest-api"
+headline: "A web interface enabling AI and Python applications to communicate over HTTP using standard methods like GET, POST, PUT, DELETE."
+description: |
+  A **REST API** (Representational State Transfer Application Programming Interface) is a popular architectural style for designing **networked applications**. It enables different software systems to **communicate over the internet** using a stateless, client-server protocol—most commonly **HTTP**. REST APIs expose **resources** (data and services) through well-defined endpoints, allowing clients to perform standard operations such as:
+
+  - **👀 GET:** Retrieve data  
+  - **✍️ POST:** Create new data  
+  - **🔄 PUT:** Replace existing data  
+  - **🩹 PATCH:** Partially update data  
+  - **❌ DELETE:** Remove data  
+
+  Resources are usually represented in formats like **JSON** or **XML**, making REST APIs flexible and easy to use across many platforms, including **Python** applications.
+
+  ---
+
+  ### ⚙️ Why REST APIs Matter
+
+  REST APIs are essential because they:
+
+  - **🔗 Decouple client and server**, enabling interoperability across diverse systems and programming languages.  
+  - **🚀 Facilitate AI integration** by providing standardized access to AI models, data workflows, and machine learning services within the **Python ecosystem**.  
+  - **🤖 Enable model deployment and inference APIs**, allowing trained models to be accessed remotely without exposing infrastructure.  
+  - **📈 Support scalability and modular architecture**, which is critical for complex AI systems composed of components like data preprocessing, feature engineering, and model serving.  
+  - **🔄 Integrate with workflow orchestration tools** such as **Airflow** and **Prefect** to manage AI pipelines efficiently.  
+
+  ---
+
+  ### 🧱 Key Components & Related Concepts
+
+  Understanding the building blocks of a **REST API** helps in effective design and consumption:
+
+  - **📁 Resources:** Core entities exposed by the API, each identified by a unique URI (Uniform Resource Identifier).  
+  - **🧠 Statelessness:** Each request contains all necessary information, which simplifies **scalability** and fault tolerance.  
+  - **📊 Representation:** Data is often formatted in **JSON**, easily parsed in Python using libraries like **Requests** or frameworks such as **FastAPI**.  
+  - **🔗 Hypermedia (HATEOAS):** Optional feature where responses include links to related resources, enabling dynamic API navigation.  
+  - **📟 Status Codes:** HTTP codes communicate request outcomes (e.g., 200 OK, 404 Not Found, 500 Internal Server Error).  
+
+  REST APIs also connect closely with important AI and software development concepts like:
+
+  - **Inference API:** Interfaces for querying machine learning models remotely.  
+  - **Model Deployment:** Exposing deployed models via REST for scalable inference.  
+  - **Caching:** Enhancing performance and reducing latency in high-throughput AI applications.  
+  - **Machine learning Pipeline:** Modular pipeline components communicating through REST APIs, orchestrated by tools like **Kubeflow** or **Airflow**.  
+  - **Experiment Tracking:** Integration with tools such as **MLflow** and **Neptune** via REST APIs to manage the AI lifecycle.
+
+  ---
+
+  ### 💡 Examples & Use Cases
+
+  REST APIs are widely used in AI workflows and data-driven applications:
+
+  - **🤖 Model Serving and Inference:** Deploy trained deep learning models behind REST endpoints to serve predictions, such as image classification using models from **Hugging Face** or **Keras**.  
+  - **📊 Data Access and ETL Pipelines:** Access large datasets or metadata programmatically for feature engineering or training, for example, datasets from **Kaggle** or **Hugging Face Datasets**.  
+  - **🧪 AI Model Management:** Manage experiments, track model versions, and deploy models using REST APIs provided by tools like **MLflow**.  
+  - **🔄 Workflow Orchestration:** Trigger, monitor, and control complex data workflows using REST APIs from orchestration platforms like **Airflow** and **Prefect**.
+
+  ---
+
+  ### 💻 Sample Code: Creating a Simple REST API with FastAPI
+
+  Below is a minimal example of a REST API exposing a prediction endpoint using **FastAPI** and **Pydantic** for data validation:
+
+  ```python
+  from fastapi import FastAPI
+  from pydantic import BaseModel
+
+  app = FastAPI()
+
+  class InputData(BaseModel):
+      text: str
+
+  @app.post("/predict")
+  def predict(input_data: InputData):
+      # Simulate model prediction (e.g., sentiment analysis)
+      prediction = "positive" if "good" in input_data.text.lower() else "negative"
+      return {"input": input_data.text, "prediction": prediction}
+  ```
+  <br>
+  This example defines a POST endpoint `/predict` that accepts JSON input validated by **Pydantic**. It simulates a simple sentiment analysis model returning a prediction based on the input text content.
+
+  ---
+
+  ### 🛠️ Tools & Frameworks Commonly Associated with REST APIs
+
+  | Tool / Framework  | Role in REST API Ecosystem                                            |
+  |-------------------|----------------------------------------------------------------------|
+  | **FastAPI**       | Modern, fast Python web framework for building REST APIs with automatic validation using **Pydantic**. |
+  | **Flask**         | Lightweight Python micro-framework often used to create simple RESTful services. |
+  | **Requests**      | Popular Python HTTP library for consuming REST APIs easily and pythonically. |
+  | **MLflow**        | Provides REST APIs for experiment tracking, model registry, and deployment. |
+  | **Kubeflow**      | Supports RESTful endpoints for managing machine learning pipelines and deployments on Kubernetes. |
+  | **Airflow**       | Workflow orchestration tool with REST APIs to manage and trigger data workflows. |
+  | **Prefect**       | Modern orchestration framework offering REST APIs for workflow control and monitoring. |
+  | **Hugging Face**  | Hosts pretrained AI models accessible via REST APIs for inference and fine tuning. |

@@ -1,0 +1,94 @@
+name: "Low-Resource Devices"
+slug: "low-resource-devices"
+headline: "Low-resource devices are computing systems with limited memory, processing power, or storage, often used in edge or embedded applications."
+description: |
+  **Low-Resource Devices** are computing platforms with **limited memory**, **processing power**, and **storage**, commonly found in **edge** or **embedded applications**. These devices include microcontrollers, IoT sensors, and other compact hardware where resources are constrained compared to traditional servers or cloud systems.
+
+  ---
+
+  ### ⚙️ Introduction to Low-Resource Devices  
+  - 🖥️ **Limited hardware capabilities** such as low clock-speed CPUs and minimal RAM.  
+  - 🔋 Often **battery-powered** or energy-harvesting, requiring **energy-efficient** operation.  
+  - 🌐 Operate with **limited or intermittent connectivity**, demanding local data processing.  
+  - 🧠 Require **optimized AI models** and **lightweight frameworks** to run efficiently on-device.  
+
+  ---
+
+  ### 🔗 Why Low-Resource Devices Matter  
+  The rise of **low-resource devices** is critical to the growth of the AI ecosystem, enabling intelligent computing closer to the data source. Key reasons include:  
+  - ⚡ **Reduced latency** by processing data locally, enabling **real-time decision-making**.  
+  - 🔒 Enhanced **privacy** through on-device data handling, minimizing cloud dependency.  
+  - 💸 Lower **network bandwidth** usage and operational costs by reducing data transmission.  
+  - 🚀 Support for applications like **autonomous drones**, **wearables**, **smart cities**, and **industrial automation**.  
+
+  ---
+
+  ### 🛠️ Key Components and Related Concepts  
+  Understanding **low-resource devices** involves several intertwined aspects:  
+
+  - **Hardware Constraints** 🖥️: Devices typically have low-speed CPUs, limited RAM (kilobytes to megabytes), and minimal storage, such as ARM Cortex-M microcontrollers.  
+  - **Energy Efficiency** 🔋: Power consumption must be minimized, especially for battery-operated or energy-harvesting devices.  
+  - **Model Optimization Techniques** 🧠: Methods like **quantization**, **pruning**, and **knowledge distillation** reduce model size and complexity while maintaining accuracy.  
+  - **Lightweight Frameworks** 📦: Specialized runtimes like **TensorFlow Lite** and **PyTorch Mobile** enable efficient AI inference with low memory overhead on CPU-only hardware.  
+  - **Connectivity and Data Handling** 🌐: Limited connectivity requires **local caching**, **on-device training**, and careful **machine learning lifecycle** management adapted for edge environments.  
+
+  ---
+
+  ### 💡 Examples & Use Cases  
+  **Low-resource devices** power diverse real-world AI applications, including:  
+
+  - 🏙️ **IoT Sensors in Smart Cities**: Embedded in streetlights or traffic signals to perform local anomaly detection and energy optimization.  
+  - ⌚ **Wearable Health Monitors**: Use compact deep learning models to detect irregular heart rhythms while preserving battery life.  
+  - 🤖 **Autonomous Drones and Robots**: Deploy lightweight neural networks for real-time navigation and obstacle avoidance.  
+  - 🏭 **Industrial Automation**: Edge devices monitor machinery for fault detection and predictive maintenance using streamlined AI models.  
+
+  ---
+
+  ### 🐍 Python Example: Quantized Model Inference on a Low-Resource Device  
+  The following example demonstrates loading and running inference with a **quantized TensorFlow Lite model**, a common approach to deploy AI on constrained hardware:  
+
+  ```python
+  import tensorflow as tf
+  import numpy as np
+
+  # Load the TensorFlow Lite model (quantized)
+  interpreter = tf.lite.Interpreter(model_path="model_quantized.tflite")
+  interpreter.allocate_tensors()
+
+  # Get input and output tensors.
+  input_details = interpreter.get_input_details()
+  output_details = interpreter.get_output_details()
+
+  # Prepare a dummy input matching the model's input shape
+  input_data = np.array(np.random.random_sample(input_details[0]['shape']), dtype=np.float32)
+
+  # Set the tensor to point to the input data
+  interpreter.set_tensor(input_details[0]['index'], input_data)
+
+  # Run inference
+  interpreter.invoke()
+
+  # Retrieve the output of the model
+  output_data = interpreter.get_tensor(output_details[0]['index'])
+  print("Model output:", output_data)
+  ```
+
+  This snippet shows the minimal setup required to run an optimized model on a **low-resource device**, highlighting the importance of **lightweight frameworks** and **model compression** techniques like quantization.  
+
+  ---
+
+  ### 📚 Tools & Frameworks Supporting Low-Resource Devices  
+  Several tools facilitate AI development and deployment on constrained hardware:  
+
+  | Tool / Framework            | Description                                                                                       |
+  |----------------------------|-------------------------------------------------------------------------------------------------|
+  | **TensorFlow Lite**         | Lightweight TensorFlow version optimized for mobile and embedded devices, supports quantization and pruning. |
+  | **PyTorch Mobile**          | Enables deployment of PyTorch models on mobile and embedded platforms with optimized runtimes.  |
+  | **MediaPipe**               | Cross-platform ML solutions for live media, optimized for low-latency on-device inference.      |
+  | **FLAML**                   | Automated machine learning library focusing on efficient hyperparameter tuning in constrained environments. |
+  | **ONNX Runtime**            | Supports optimized model inference across diverse hardware, including CPU-only devices.         |
+  | **Hugging Face Transformers** | Provides model compression and fine tuning tools to adapt large models for smaller devices.     |
+  | **OpenCV**                  | Computer vision library with efficient implementations suitable for embedded systems.            |
+  | **Keras**                   | High-level neural network API integrating with TensorFlow Lite for model optimization and deployment. |
+
+  These tools integrate with broader **machine learning pipelines**, enabling seamless workflows from training on powerful hardware to deployment on **low-resource devices**.

@@ -1,0 +1,113 @@
+name: "Perception Systems"
+slug: "perception-systems"
+headline: "Perception systems use sensors and AI algorithms to detect, interpret, and understand the surrounding environment for autonomous or intelligent applications."
+description: |
+  **Perception Systems** are essential AI components that enable machines to **interpret sensory data** from their environment, transforming raw inputs into **structured, meaningful information**. These systems mimic human senses by processing data such as **images, sounds, and sensor readings** to help AI models and agents understand and interact with the world. 
+  <br><br>
+  Key features include:  
+
+  - 🔍 **Sensing the environment** through devices like cameras, microphones, LiDAR, and IoT sensors  
+  - ⚙️ **Processing and transforming raw data** into usable formats  
+  - 🧠 **Enabling AI models** to make informed decisions based on sensory inputs  
+
+  ---
+
+  ### 🔎 Why Perception Systems Matter
+
+  **Perception systems** serve as the **sensory front-end** in AI workflows, providing the critical context and situational awareness that AI models require to function effectively. Their importance can be summarized as follows:  
+
+  - 👀 Allow machines to "see," "hear," and "sense" their surroundings, bridging the gap between physical reality and digital understanding  
+  - 🚗 Enable safe navigation in applications like autonomous vehicles by detecting pedestrians, traffic signs, and road conditions  
+  - 🔗 Support **multimodal AI** by integrating multiple data types (vision, language, audio), enhancing the richness of AI understanding  
+  - 📈 Improve performance in diverse fields such as robotics, healthcare, augmented reality, and environmental monitoring  
+
+  ---
+
+  ### 🛠️ Key Components and Related Concepts
+
+  **Perception systems** consist of several interconnected components and are closely linked to important AI concepts:  
+
+  - 📷 **Sensing Hardware**: Devices including cameras, microphones, LiDAR, radar, and **IoT sensors** collect raw environmental data  
+  - 🔄 **Preprocessing**: Involves cleaning, normalizing, and transforming data to reduce noise and extract relevant features  
+  - 🧩 **Feature Engineering**: Extracts meaningful features like edges in images or frequency components in audio, enhancing data quality  
+  - 🧠 **Machine Learning Models**: Utilize **deep learning models** such as convolutional neural networks (CNNs) and recurrent neural networks (RNNs) to perform tasks like **classification**, **keypoint estimation**, and **segmentation**  
+  - 🤖 **Robotics Simulation and Control**: Libraries like **PyBullet** provide physics-based simulation environments to test and develop perception and control algorithms in virtual robotic systems
+  - 📊 **Inference and Interpretation**: Converts processed data into structured outputs (object labels, spatial coordinates) for downstream AI use  
+  - 🔧 **Feedback and Adaptation**: Employs **fine tuning** and **hyperparameter tuning** to improve accuracy and adapt to new environments  
+
+  These components integrate with broader AI concepts including the **machine learning pipeline**, **model deployment** (leveraging **GPU acceleration** and **container orchestration**), and **experiment tracking** for performance monitoring and **benchmarking**. The use of **pretrained models** accelerates development by providing robust starting points for perception tasks.  
+
+  ---
+
+  ### 🌍 Examples & Use Cases
+
+  **Perception systems** power a wide range of applications across industries, including:  
+
+  | Application Area          | Description                                                       | Example Tools & Techniques                      |
+  |--------------------------|-------------------------------------------------------------------|------------------------------------------------|
+  | Autonomous Vehicles       | Detecting obstacles, lane markings, and traffic signals          | Detectron2, OpenCV, PyTorch                      |
+  | Robotics                 | Object recognition, localization, and manipulation                | ROS Python interfaces, TensorFlow, Keras        |
+  | Healthcare Imaging       | Medical image analysis for diagnosis and treatment planning       | MONAI, scikit-learn, NumPy                       |
+  | Augmented Reality (AR)   | Overlaying digital content on real-world scenes                   | Mediapipe, OpenCV, Unity ML Agents               |
+  | Surveillance & Security  | Facial recognition, anomaly detection, and activity recognition   | YOLO, Hugging Face Transformers, Flaml           |
+  | Environmental Monitoring | Tracking ecosystem changes using sensor arrays and satellite data | Dask, pandas, Altair                              |
+
+  ---
+
+  ### 🐍 Python Example: Simple Image Classification Pipeline
+
+  The following snippet demonstrates a core perception task: **image classification** using a pretrained deep learning model.  
+
+  ```python
+  import torch
+  from torchvision import models, transforms
+  from PIL import Image
+
+  # Load a pretrained deep learning model (ResNet)
+  model = models.resnet50(pretrained=True)
+  model.eval()
+
+  # Define preprocessing steps
+  preprocess = transforms.Compose([
+      transforms.Resize(256),
+      transforms.CenterCrop(224),
+      transforms.ToTensor(),
+      transforms.Normalize(
+          mean=[0.485, 0.456, 0.406], 
+          std=[0.229, 0.224, 0.225]
+      ),
+  ])
+
+  # Load and preprocess image
+  img = Image.open("sample.jpg")
+  input_tensor = preprocess(img)
+  input_batch = input_tensor.unsqueeze(0)  # Create batch dimension
+
+  # Perform inference
+  with torch.no_grad():
+      output = model(input_batch)
+
+  # Convert output to probabilities
+  probabilities = torch.nn.functional.softmax(output[0], dim=0)
+  print(probabilities)
+  ```
+  <br>
+  This example loads a **pretrained ResNet model**, preprocesses an input image by resizing and normalizing it, and performs inference to output classification probabilities. It illustrates the integration of **preprocessing** and **model inference** in perception workflows.  
+
+  ---
+
+  ### 🧰 Tools & Frameworks Commonly Associated with Perception Systems
+
+  The development of **perception systems** relies on a rich ecosystem of tools and libraries that support data processing, model building, and deployment:  
+
+  | Tool/Framework         | Description                                                                                 |
+  |-----------------------|---------------------------------------------------------------------------------------------|
+  | Detectron2            | State-of-the-art framework for object detection and segmentation built on PyTorch            |
+  | OpenCV                | Versatile computer vision library for image processing and feature detection                  |
+  | Mediapipe             | Cross-platform framework for multimodal perception pipelines (hand tracking, face detection) |
+  | PyTorch & TensorFlow  | Leading deep learning frameworks for building and training complex neural networks            |
+  | MONAI                 | Specialized tools for medical imaging perception tasks                                       |
+  | Hugging Face          | Supports multimodal models combining vision and language                                    |
+  | Flaml                 | Automatic machine learning library for optimizing model selection and hyperparameters        |
+  | ROS Python Interfaces | Robotics Operating System tools for integrating perception with robotic control               |
+  | Altair & Bokeh        | Visualization libraries for exploring and presenting perception data                          |

@@ -1,0 +1,90 @@
+name: "CPU"
+slug: "cpu"
+headline: "Central processing unit of a computer, handling general-purpose computations and running programs."
+description: |
+  The **Central Processing Unit (CPU)** is often called the "brain" of a computer system. It is a vital **hardware component** that executes instructions from software, performs arithmetic and logical operations, and manages data flow within the computer. In the realm of **AI and machine learning**, the CPU plays a foundational role by running workloads, managing data pipelines, and orchestrating tasks that do not require specialized hardware acceleration.
+
+  - ⚙️ **Versatile** for general-purpose computing  
+  - 🔄 **Coordinates** data flow and system operations  
+  - 💡 **Supports** AI workflows beyond specialized hardware  
+  - 🛠️ **Enables** flexible prototyping and debugging  
+
+  ---
+
+  ### ⚙️ Why the CPU Matters
+
+  The **CPU's general-purpose design** makes it essential for a wide variety of tasks beyond AI-specific workloads. It is particularly important for:
+
+  - 🔄 **Data preprocessing and ETL** operations, where data is cleaned, shuffled, and transformed before use  
+  - 🔗 Managing **machine learning pipelines** that combine feature extraction, model training, and evaluation  
+  - ⚡ Supporting **parallel processing** and multithreading to accelerate workloads without specialized accelerators  
+  - 🧪 Enabling **rapid prototyping** and debugging in environments like **Jupyter** or **Colab**  
+  - 💰 Serving as a fallback when **GPU** or **TPU** acceleration is unavailable or cost-prohibitive  
+
+  Despite the rise of specialized hardware, the CPU remains a backbone of the **machine learning ecosystem**, especially for tasks requiring complex control flow or lower memory overhead.
+
+  ---
+
+  ### 🧩 Key Components & Related Concepts
+
+  Understanding the **CPU** involves its main components and how they connect to related AI concepts:
+
+  - ➕ **Arithmetic Logic Unit (ALU):** Performs arithmetic and logical operations such as addition and bitwise operations  
+  - 🎛️ **Control Unit (CU):** Directs processor operations, coordinating the ALU, memory, and I/O devices  
+  - 📦 **Registers:** Small, fast storage locations holding data and instructions currently processed  
+  - 💾 **Cache Memory:** A hierarchy (L1, L2, L3) of fast memory storing frequently accessed data to speed processing  
+  - ⏱️ **Clock Speed:** Measured in GHz, indicating how many cycles per second the CPU executes  
+  - 🧠 **Cores and Threads:** Multiple cores allow independent or parallel task processing; threads enable concurrent execution within cores  
+
+  These components enable efficient instruction execution, data management, and throughput optimization. The CPU’s role naturally intersects with concepts such as **GPU acceleration**, **parallel processing**, **machine learning pipelines**, and **caching**, highlighting its centrality in both foundational computing and advanced AI workflows.
+
+  ---
+
+  ### 🧪 Examples & Use Cases
+
+  While large **deep learning model training** typically relies on **GPUs** or **TPUs**, CPUs are often used for:
+
+  - Training smaller models with libraries like **scikit-learn** or **XGBoost**, leveraging parallel CPU threads  
+  - Running inference on **pretrained models** in production environments constrained by latency or resources  
+  - Performing **feature engineering** and **data shuffling** before feeding data into GPU-accelerated pipelines  
+  - Orchestrating workflows with tools such as **Airflow** or **Kubeflow**, managing complex AI pipelines including data ingestion, training, and experiment tracking with **MLflow** or **Comet**  
+
+  CPUs efficiently handle control logic and scheduling, coordinating resources across distributed systems.
+
+  ---
+
+  ### 💻 Python Example: Training a Random Forest on CPU
+
+  Here is a simple example demonstrating CPU usage for training a machine learning model with **scikit-learn**:
+
+  ```python
+  import numpy as np
+  from sklearn.ensemble import RandomForestClassifier
+  from sklearn.datasets import load_iris
+
+  # Load dataset
+  data = load_iris()
+  X, y = data.data, data.target
+
+  # Train a random forest classifier using all CPU cores
+  clf = RandomForestClassifier(n_estimators=100, n_jobs=-1)  # Utilize all CPU threads
+  clf.fit(X, y)
+  print("Model trained on CPU:", clf.score(X, y))
+  ```
+  <br>
+  This example loads the Iris dataset and trains a **Random Forest** classifier using all available CPU cores (`n_jobs=-1`) to parallelize training. It illustrates how CPUs can efficiently handle classical machine learning algorithms that benefit from multithreading.
+
+  ---
+
+  ### 🧰 Tools & Frameworks Commonly Associated with CPUs
+
+  Several AI and Python ecosystem tools leverage CPUs either as primary compute resources or within heterogeneous environments:
+
+  | Tool/Framework    | Role with CPU                                         |
+  |-------------------|------------------------------------------------------|
+  | **Jupyter**       | Interactive notebooks for CPU-based data exploration |
+  | **Airflow**       | Workflow orchestration and scheduling CPU-bound tasks|
+  | **MLflow**        | Experiment tracking, often for CPU-based model runs  |
+  | **Scikit-learn**  | CPU-optimized classical machine learning algorithms  |
+
+  Libraries like **NumPy** and **pandas** also optimize many operations for efficient CPU execution, making them foundational for data manipulation and analysis.

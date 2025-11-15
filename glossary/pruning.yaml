@@ -1,0 +1,114 @@
+name: "Pruning"
+slug: "pruning"
+headline: "Pruning is a technique in machine learning used to reduce the complexity of a model, such as a decision tree or neural network, by removing unnecessary or less important parts."
+description: |
+  Pruning is like giving your **machine learning model** a smart haircut — trimming away parts that aren’t really needed. Imagine your model as a big **tree** with many branches (parameters). Some branches don’t help much in making predictions, so **pruning** cuts those off. This makes the model **smaller**, **faster**, and easier to run, especially on devices like phones or embedded gadgets.
+  <br><br>
+  In simple terms, **pruning** means removing unnecessary parts of a machine learning model — such as tiny connections (**weights**), neurons, or even entire layers — that don’t add much value. This helps in:
+
+  - 📉 Making the model **smaller** and **lighter**  
+  - ⚡ Speeding up how fast it makes **predictions**  
+  - 💾 Using **less memory** and **energy**  
+
+  Pruning is especially useful for big models like **deep neural networks**, which can have millions or billions of parameters.
+
+  ---
+
+  ### 🤔 Why Pruning Matters
+
+  Modern **AI models** are powerful but often huge and heavy. While this helps them perform well, it also causes problems:
+
+  - 📱 **Limited Resources:** Hard to run big models on phones or small devices like **microcontrollers**.  
+  - ⏳ **Slow Predictions:** Larger models take longer to give answers, which is bad for real-time apps like voice assistants or video analysis.  
+  - 🔋 **High Energy Use:** Bigger models consume more power, draining batteries faster.  
+  - 🎯 **Overfitting Risk:** Very complex models sometimes "memorize" training data and don’t generalize well on new data.
+
+  **Pruning** helps by making models smaller and faster, often improving their ability to **generalize** and making them easier to deploy in real-world settings.
+
+  ---
+
+  ### 🧩 Key Components & Related Concepts
+
+  **Pruning** involves several key aspects:
+
+  - **What gets pruned?**  
+      - **Weight pruning:** Remove individual small weights (connections).  
+      - **Neuron pruning:** Remove entire neurons or channels in a layer.  
+      - **Structured pruning:** Remove bigger chunks like layers or blocks, simplifying the model significantly.
+
+  - **How to decide what to prune?**  
+      - **Magnitude-based:** Remove weights close to zero, assuming low importance.  
+      - **Gradient-based:** Use training signals (**gradients**) to identify less important parts.  
+      - **Sensitivity analysis:** Evaluate how removing parts affects accuracy or loss.
+
+  - **When to prune?**  
+      - **Before training:** Design a smaller model upfront.  
+      - **After training:** Cut parts after the model is fully trained.  
+      - **During training:** Gradually prune while training, often with retraining steps.
+
+  - **After pruning:** Models usually need some **fine tuning** (retraining) to regain accuracy and stabilize learning.
+
+  Pruning is closely related to other important concepts such as **quantization** (reducing number precision to shrink models), **fine tuning**, **overfitting** prevention, and fits into the overall **machine learning pipeline**. It also benefits from **experiment tracking** tools like **MLflow** or **Neptune** and can improve **GPU acceleration** by reducing model size. Pruning is especially popular for adapting large **pretrained models** efficiently.
+
+  ---
+
+  ### 🚀 Examples and Use Cases
+
+  **Pruning** is widely applied in various domains:
+
+  - **Edge AI & IoT:** Enables running deep learning on tiny devices like **microcontrollers** by shrinking models.  
+  - **Cloud Services:** Saves GPU/TPU resources and reduces costs by using smaller, faster models.  
+  - **Transfer Learning:** Prunes large pretrained models before fine tuning for faster, more efficient training.  
+  - **Real-Time Applications:** Speeds up tasks such as video keypoint detection or chatbot sentiment analysis.
+
+  ---
+
+  ### 🔧 Python Example: Simple Weight Pruning with PyTorch
+
+  Here is a quick example demonstrating how to prune 30% of the smallest weights in a PyTorch model:
+
+  ```python
+  import torch
+  import torch.nn.utils.prune as prune
+  import torch.nn as nn
+
+  # Define a simple model
+  model = nn.Sequential(
+      nn.Linear(100, 50),
+      nn.ReLU(),
+      nn.Linear(50, 10)
+  )
+
+  # Select all linear layers to prune their weights
+  parameters_to_prune = [(module, 'weight') for module in model if isinstance(module, nn.Linear)]
+
+  # Prune 30% of the smallest weights globally
+  prune.global_unstructured(
+      parameters_to_prune,
+      pruning_method=prune.L1Unstructured,
+      amount=0.3,
+  )
+
+  # Check sparsity of first layer
+  sparsity = 100 * float(torch.sum(model[0].weight == 0)) / model[0].weight.nelement()
+  print(f"Sparsity in first layer: {sparsity:.2f}%")
+  ```
+
+  This example removes the least important weights by applying **global unstructured pruning** using the L1 norm. It reduces the model’s complexity while maintaining its overall structure, demonstrating how pruning can be implemented practically.
+
+  ---
+
+  ### 🛠️ Popular Tools & Frameworks for Pruning
+
+  | 🧰 Tool / Library       | What It Does                                      |
+  |------------------------|--------------------------------------------------|
+  | **PyTorch**             | Built-in pruning utilities in `torch.nn.utils.prune` |
+  | **TensorFlow/Keras**    | Pruning support via TensorFlow Model Optimization Toolkit |
+  | **MLflow**              | Tracks experiments and pruning results           |
+  | **Hugging Face**        | Hosts pretrained models ready for pruning and fine tuning |
+  | **FLAML**               | AutoML library with pruning in hyperparameter tuning |
+  | **Neptune**             | Experiment management and monitoring              |
+  | **Comet**               | Visualization and tracking of pruning experiments |
+  | **Keras**               | Easy pruning APIs integrated with TensorFlow      |
+
+  These tools simplify experimenting with and deploying pruning in real projects, helping to optimize models efficiently.

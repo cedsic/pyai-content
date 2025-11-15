@@ -1,0 +1,46 @@
+name: "GPU"
+slug: "gpu"
+headline: "Graphics processing unit optimized for parallel computation, often used to accelerate machine learning and AI tasks."
+description: |
+  A **GPU (Graphics Processing Unit)** is a specialized hardware chip designed for **parallel computations**, originally created to render graphics in gaming and visualization.
+  <br><br>
+  Today, GPUs are widely used in **artificial intelligence, machine learning, scientific computing, and high-performance computing (HPC)**, where they excel at performing **thousands of operations simultaneously**.
+  <br><br>
+  They are particularly effective for **matrix operations, neural network training, and large-scale data processing**, making them much faster than CPUs for tasks that benefit from massive parallelization.
+
+  ---
+
+  ### ⚙️ Key Features
+  - **Parallel Processing** – Thousands of cores handling computations at once.  
+  - **High Throughput** – Efficiently processes large datasets and complex models.  
+  - **Specialized Hardware** – Includes components like **Tensor Cores** (in NVIDIA GPUs) for deep learning.  
+  - **Flexible Ecosystem** – Works with frameworks like **TensorFlow**, **PyTorch**, and **JAX**.  
+
+  ---
+
+  ### 🚀 Applications
+  - **Artificial Intelligence & Machine Learning** – Training deep learning models much faster than CPUs.  
+  - **Computer Graphics & Gaming** – Rendering realistic visuals in real time.  
+  - **Scientific Simulations** – Physics, weather forecasting, molecular modeling.  
+  - **Data Analytics & Finance** – High-frequency trading, large-scale simulations.  
+  - **Generative AI & LLMs** – Powering modern AI models such as GPT and Stable Diffusion.  
+
+  ---
+
+  ### 📊 Examples
+  - Training a model like **ResNet-50 on ImageNet** can take **weeks on CPUs** but only **days on GPUs**.  
+  - Cloud providers (AWS, GCP, Azure) offer **GPU instances** so developers can rent GPU power on demand.  
+
+  ---
+
+  ### 🔗 Related Terms
+  - **GPU Acceleration** – Using GPUs to speed up general-purpose computing.  
+  - **GPU Instances** – Cloud-based VMs equipped with GPUs.  
+  - **CUDA** – NVIDIA’s platform for GPU programming.  
+  - **TPU** – Google’s Tensor Processing Unit, a specialized AI accelerator.  
+
+  ---
+
+  ### 🔮 Future Outlook
+  GPUs remain essential for **deep learning, generative AI, and scientific workloads**.  
+  While alternatives like **TPUs and custom AI chips** are emerging, GPUs continue to dominate due to their **flexibility, ecosystem support, and wide availability**.

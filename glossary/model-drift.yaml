@@ -1,0 +1,113 @@
+name: "Model Drift"
+slug: "model-drift"
+headline: "Model drift occurs when a machine learning model’s performance degrades over time due to changes in data patterns or underlying distributions."
+description: |
+  **Model Drift** occurs when a machine learning model’s **performance degrades** over time due to changes in the **data patterns** or underlying distributions it was originally trained on. This phenomenon means the **assumptions** made during the **training pipeline** no longer hold true in the current environment, causing the model to produce **inaccurate** or **biased results**.
+  <br><br>
+  Key points to understand about model drift include:  
+  - 🔄 **Changing Data:** The input data's statistical properties shift over time, affecting model predictions.  
+  - 📉 **Performance Impact:** Drift leads to declining **model performance**, reducing reliability.  
+  - ⚠️ **Risk of Errors:** Without detection, drift can cause costly mistakes in decision-making systems.  
+  - 🔍 **Need for Monitoring:** Continuous evaluation and **experiment tracking** are essential to identify drift early.
+
+  ---
+
+  ### 📉 Why Model Drift Matters
+
+  As AI systems become integral to critical applications, maintaining their **accuracy** and **robustness** is vital. Model drift can silently erode trust by causing unexpected failures or biases.
+  <br><br>
+  Important reasons to address model drift:  
+  - 🎯 **Maintaining Accuracy:** Drift causes performance drops that directly affect business outcomes or safety.  
+  - ⚖️ **Compliance and Fairness:** Drift may introduce unfair biases or violate regulations, impacting ethical AI use.  
+  - ⏱️ **Operational Efficiency:** Early detection enables timely retraining, reducing downtime and errors.  
+  - 🔄 **Resource Management:** Understanding drift optimizes **machine learning lifecycle** efforts and resource allocation.
+
+  ---
+
+  ### 🧩 Key Components and Related Concepts
+
+  Model drift encompasses several interrelated phenomena and connects closely with other AI concepts:  
+
+  - **Data Drift:** Changes in the distribution of input features, such as shifts in customer demographics or market conditions.  
+  - **Concept Drift:** Alterations in the relationship between inputs and outputs, meaning the original concept the model learned no longer applies.  
+  - **Feature Drift:** Individual features evolve differently, impacting their predictive power.  
+  - **Label Drift:** Variations in the target variable distribution, common in classification tasks.
+
+  These components relate directly to important concepts like **model performance**, **feature engineering**, **experiment tracking**, **model deployment**, and the overall **machine learning pipeline**. Embedding drift awareness into these areas helps build resilient AI systems. For example, continuous **model deployment** pipelines must include drift detection to trigger retraining or rollback, while **AutoML** tools can automate retraining when drift is detected.
+
+  ---
+
+  ### 📚 Examples & Use Cases
+
+  Understanding model drift is critical across various domains:  
+
+  - 💳 **Financial Fraud Detection:** Fraud patterns evolve rapidly, causing **concept drift**. Regular monitoring and retraining with fresh data keep detection effective.  
+  - 🏥 **Healthcare Diagnostics:** New imaging devices or protocols can introduce **data drift**, risking misdiagnoses if undetected.  
+  - 🛒 **E-commerce Recommendation:** Changing user preferences and product catalogs cause **feature drift**, requiring updates in the **training pipeline** to maintain personalization.  
+  - 🚗 **Autonomous Vehicles:** Sensor data shifts due to environment or hardware changes, making drift detection in perception models essential for safety.
+
+  ---
+
+  ### 💻 Example: Simple Drift Detection with PSI
+
+  Here is a Python example demonstrating how to calculate the **Population Stability Index (PSI)**, a common metric used to detect **data drift** between a reference and current dataset:
+
+  ```python
+  import numpy as np
+  import pandas as pd
+
+  def psi(expected, actual, buckets=10):
+      def scale_range(input, min_val, max_val):
+          input += -(np.min(input))
+          input /= np.max(input) / (max_val - min_val)
+          input += min_val
+          return input
+
+      breakpoints = np.arange(0, buckets + 1) / (buckets) * 100
+      expected_percents = np.percentile(expected, breakpoints)
+      actual_percents = np.percentile(actual, breakpoints)
+
+      def sub_psi(e_perc, a_perc):
+          if a_perc == 0:
+              a_perc = 0.0001
+          if e_perc == 0:
+              e_perc = 0.0001
+          return (e_perc - a_perc) * np.log(e_perc / a_perc)
+
+      psi_value = 0
+      for i in range(len(expected_percents) - 1):
+          e_perc = ((expected >= expected_percents[i]) & (expected < expected_percents[i+1])).mean()
+          a_perc = ((actual >= expected_percents[i]) & (actual < expected_percents[i+1])).mean()
+          psi_value += sub_psi(e_perc, a_perc)
+      return psi_value
+
+  # Example usage:
+  reference_data = np.random.normal(0, 1, 1000)
+  current_data = np.random.normal(0.1, 1.1, 1000)
+
+  psi_score = psi(reference_data, current_data)
+  print(f"PSI score: {psi_score:.4f}")
+  ```
+  <br>
+  This code calculates the PSI by comparing the distributions of two datasets across defined buckets. A PSI score above 0.1 indicates moderate drift, while above 0.25 signals significant drift requiring attention.
+
+  ---
+
+  ### 🛠️ Tools & Frameworks Commonly Associated with Model Drift
+
+  Several tools support **drift detection**, monitoring, and mitigation within modern **MLOps** frameworks:
+
+  | Tool       | Description                                                                                       |
+  |------------|-------------------------------------------------------------------------------------------------|
+  | MLflow     | Provides comprehensive **experiment tracking** and model versioning to manage drift over the **machine learning lifecycle**. |
+  | Neptune    | A metadata store for monitoring **model performance** metrics and data distributions in real time. |
+  | Airflow    | Enables orchestration of **machine learning pipelines** that include drift detection and automated retraining workflows. |
+  | Kubeflow   | Supports scalable deployment and retraining of models with integrated drift monitoring in production. |
+  | Flaml      | Efficient library assisting in automated drift detection through lightweight models.            |
+  | H2O.ai     | Offers scalable solutions for monitoring and adapting models in production with drift detection. |
+  | pandas     | Core Python library used for data manipulation and implementing statistical drift tests.        |
+  | scikit-learn | Provides statistical tests and tools for performance monitoring related to drift.              |
+  | Altair     | Visualization library to plot data distributions and performance trends to spot drift visually. |
+  | Seaborn    | Visualization library helpful for monitoring data and model behavior changes over time.         |
+
+  These tools integrate seamlessly to build robust, drift-aware AI systems that maintain reliability and compliance.

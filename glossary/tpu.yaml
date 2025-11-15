@@ -1,0 +1,46 @@
+name: "TPU"
+slug: "tpu"
+headline: "Tensor Processing Unit, specialized hardware designed by Google for fast, large-scale machine learning computations."
+description: |
+  **TPU (Tensor Processing Unit)** is Google’s custom AI accelerator, built to **optimize neural network training and inference** at scale.  
+  It performs **tensor operations extremely efficiently**, offering high throughput for deep learning workloads.
+
+  ---
+
+  ### 🔑 Key Features ✨
+  - **High Performance** – Accelerates large-scale model training. 🚀  
+  - **Energy Efficient** – Consumes less power compared to equivalent GPU workloads. 🔋  
+  - **Tensor-Focused** – Optimized for matrix/tensor computations common in deep learning. 🔢  
+  - **Cloud Integration** – Available on Google Cloud for scalable AI experiments. ☁️
+
+  ---
+
+  ### 🎯 Ideal Use Cases 💡
+  - Training large neural networks in **TensorFlow**. 🧠  
+  - Inference for AI applications requiring low latency. ⏱️  
+  - Research environments needing high-speed computation. 🔬
+
+  ---
+
+  ### 🖥️ CPU vs GPU vs TPU ⚙️
+
+  ##### <u>CPU</u>
+
+  CPUs (Central Processing Units) and GPUs (Graphics Processing Units) are both processors, but they are designed for very different types of workloads. CPUs are optimized for **sequential, general-purpose computing**, with a few powerful cores capable of handling a wide range of tasks efficiently. They excel at tasks that require complex decision-making, branching logic, or running multiple software processes simultaneously. 🧩
+  <br><br>
+  ##### <u>GPU</u>
+
+  In contrast, GPUs are built for **highly parallel computation**, containing hundreds or thousands of smaller cores that can perform many simple calculations simultaneously. This architecture makes GPUs ideal for **matrix operations, neural network training, graphics rendering, and large-scale scientific simulations**. 🎨🧮 While CPUs are essential for running an operating system and general software, GPUs accelerate tasks that can be **parallelized at scale**, such as AI model training and inference, enabling massive speedups that would be impossible on CPUs alone. ⚡
+  <br><br>
+  ##### <u>TPU</u>
+
+  TPUs take this specialization further, being **custom-built for tensor operations** in deep learning. Compared to GPUs, TPUs can perform **certain neural network computations even faster and more energy-efficiently**, especially for models running in cloud environments like Google Cloud. ☁️🔋
+
+  ---
+
+  ### 🔗 Related Terms 📚
+  - **GPU** – General-purpose accelerator hardware. 🖥️  
+  - **GPU Acceleration** – Using GPUs to speed up computation. ⚡  
+  - **TensorFlow** – Framework often paired with TPUs. 🔄  
+  - **JAX** – High-performance numerical computing library used for TPU-based training. 🔢  
+  - **Kubeflow** – MLOps platform enabling scalable orchestration of TPU workloads. ⚙️
