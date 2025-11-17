@@ -1,0 +1,29 @@
+name: FastAPI
+slug: fastapi
+headline: "High-performance Python framework for building APIs with automatic documentation."
+urls:
+  github: https://github.com/fastapi/fastapi
+  docs: https://fastapi.tiangolo.com/
+overview: >
+  FastAPI is a modern, asynchronous web framework for building APIs using Python type hints, built on top of Starlette and Pydantic.
+description: |
+  FastAPI is a high-performance, Python-based web framework designed for building APIs quickly and efficiently.  
+  It emphasizes **speed**, **developer productivity**, and **automatic documentation** using **OpenAPI** and **JSON Schema**.
+
+  ### ⭐ Key Features
+  - **Asynchronous support** using `async` / `await`
+  - **Automatic API docs generation** (Swagger UI & ReDoc)
+  - **Fast performance** comparable to Node.js and Go (powered by Starlette and Pydantic)
+  - **Type-hinted validation** and serialization out of the box
+  - **Dependency Injection system** built-in
+  - **Great for microservices & backend APIs**
+  
+  ### 🚀 Example Usage
+  ```python
+  from fastapi import FastAPI
+
+  app = FastAPI()
+
+  @app.get("/")
+  def read_root():
+      return {"message": "Hello, FastAPI!"}
